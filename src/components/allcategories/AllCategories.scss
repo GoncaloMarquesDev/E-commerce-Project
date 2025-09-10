@@ -1,0 +1,19 @@
+.grid-4-categories {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr); /* desktop */
+  max-width: 1366px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr); /* tablet */
+    max-width: 1024px;
+  }
+
+  @media (max-width: 300px) {
+    grid-template-columns: 1fr; /* mobile */
+    max-width: 640px;
+  }
+}
+.wrapper-products{
+margin-left: 60px;
+}

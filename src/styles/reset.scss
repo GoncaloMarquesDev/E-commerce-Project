@@ -1,0 +1,47 @@
+/* reset.css */
+
+/* Remove margens e paddings padrões */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Remover decoração e cor padrão dos links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Tornar imagens responsivas por padrão */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Remover estilo padrão de listas */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Uniformizar fonte */
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+/* Botões sem estilos “feios” do browser */
+button {
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Inputs e textarea com fonte herdada */
+input,
+textarea {
+  font: inherit;
+}

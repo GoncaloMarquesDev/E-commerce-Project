@@ -1,0 +1,40 @@
+.footer_wrapper {
+  background-color: black;
+  color: rgb(255, 255, 255);
+  margin-top: 100px;
+  display: flex;
+  justify-content: left;
+
+}
+.footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: grid;
+  grid-template-areas: "products resources subscribe";
+  grid-template-columns: 1fr 1fr 1fr;
+ margin-left: 60px;
+  max-width: 1366px;
+}
+.footer_products {
+  grid-area: products;
+}
+.footer_resources {
+  grid-area: resources;
+}
+.footer_subscribe {
+  grid-area: subscribe;
+}
+.footer h6 {
+  font-size: 14px; /* maior */
+  font-weight: bold; /* mais grosso */
+  margin-bottom: 15px; /* espaço entre título e links */
+}
+@media (max-width: 700px) {
+  .footer {
+    grid-template-areas:
+      "products"
+      "resources"
+      "subscribe"; /* ficam em coluna */
+    grid-template-columns: 1fr;
+  }
+}

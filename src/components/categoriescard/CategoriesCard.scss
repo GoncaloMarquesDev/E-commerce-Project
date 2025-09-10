@@ -1,0 +1,37 @@
+
+.product_card {
+  display: flex;
+  flex-direction: row;
+  align-items:last baseline;
+  max-width: 250px;
+  
+  p {
+  line-height: 1.1; /* padrão é ~1.5 */
+}
+  
+}
+.header {
+  display: flex;
+  margin-right: 10px;
+  
+}
+.text {
+  display: flex;
+  flex-direction: column;
+}
+.category {
+  color: #81807e;
+  font-size: .9rem;
+   @media (max-width: 1024px){
+    font-size: .8rem;
+  }
+}
+.item {
+  font-size: 1.2rem;
+  
+  @media (max-width: 1024px){
+    font-size: 1rem;
+  }
+ 
+}
+

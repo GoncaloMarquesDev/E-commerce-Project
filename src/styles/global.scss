@@ -1,0 +1,73 @@
+@use "./variables";
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap");
+
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+  color: variables.$color-text-dark;
+  background-color: variables.$color-bg-light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: variables.$font-main;
+  margin: 0;
+  position: relative;
+  color: variables.$color-text-red;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+}
+
+button {
+  border-radius: variables.$button-radius;
+  border: 1px solid transparent;
+  padding: variables.$button-padding;
+  font-size: variables.$button-font-size;
+  font-weight: variables.$button-font-weight;
+  font-family: inherit;
+  background-color: variables.$color-bg-dark;
+  cursor: pointer;
+  transition: border-color 0.25s;
+
+  &:hover {
+    border-color: variables.$color-bg-button-hover;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: variables.$color-text-light;
+    background-color: variables.$color-bg-light;
+  }
+
+  a:hover {
+    color: variables.$color-bg-button-hover;
+  }
+
+  button {
+    background-color: variables.$color-bg-light; // ✅ corrigido
+  }
+}
