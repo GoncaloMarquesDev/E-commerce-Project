@@ -1,7 +1,7 @@
 import Card from "../card/Card";
 import "./ProductCard.scss"
 
-function ProductCard({ imgSrc, itemName, price }) {
+function ProductCard({ imgSrc, itemName, price, quantity }) {
   //os componentes devem ser nomes no singular
   return (
     <div className="card">
@@ -10,6 +10,7 @@ function ProductCard({ imgSrc, itemName, price }) {
       <img src={imgSrc} alt={name} />
       <p>{itemName}</p>
       <p>{price} €</p>
+      <p>{quantity}</p>
     </Card>
     </div>
   );

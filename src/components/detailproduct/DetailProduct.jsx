@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-
 import "./DetailProduct.scss";
+import MoreLikeThis from "../morelikethis/MoreLikeThis";
+import { CartContext } from "../../context/CartContext";
+
+
 
 function DetailProduct() {
+  
+
   const { id } = useParams();
-
   const [productById, setProductById] = useState(null);
-  console.log("productById", productById);
 
- const moreLikeThis = productById?.category?.id;
-console.log("morelikethis", moreLikeThis);
+  const { addToCart, quantities, setQuantities } = useContext(CartContext);
+
+  const moreLikeThis = productById?.category?.id;
+  console.log("moreLikeThis no detail", moreLikeThis);
 
   useEffect(() => {
     const fetchProductById = async () => {
@@ -28,42 +33,76 @@ console.log("morelikethis", moreLikeThis);
     fetchProductById();
   }, [id]);
 
-  if (!productById) return <p>Loading</p>;
+  if (!productById) return <p>Loading...</p>;
 
   return (
-    <div className="wrapper-detail">
-      <div className="wrapper-detail-product">
-        {/* coluna da esquerda: imagens */}
-        <div className="product-images">
-          <div className="thumbnails">
-            <img src={productById.images[0]} alt={productById.title} />
-            <img src={productById.images[1]} alt={productById.title} />
-            <img src={productById.images[2]} alt={productById.title} />
+    <>
+      {" "}
+      <div className="wrapper-detail">
+        <div className="wrapper-detail-product">
+          {/* coluna da esquerda: imagens */}
+          <div className="product-images">
+            <div className="thumbnails">
+              {productById.images.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`${productById.title} ${index}`}
+                />
+              ))}
+            </div>
+            <div className="main-image">
+              <img
+                src={productById.category.image}
+                alt={productById.category.name}
+              />
+            </div>
           </div>
-          <div className="main-image">
-            <img src={productById.category.image} alt="" />
-          </div>
-        </div>
 
-        {/* coluna da direita: informações */}
-        <div className="product-info">
-          <h2>{productById.title}</h2>
-          <p className="price">{productById.price}$</p>
-          <div className="rating">⭐⭐⭐⭐⭐</div>
-          <p className="description">{productById.description}</p>
-          <div className="options">
-            <button className="btn-red">Comprar</button>
-          <button className="btn-black">Adicionar ao carrinho</button>
-            
+          {/* coluna da direita: informações */}
+          <div className="product-info">
+            <h2>{productById.title}</h2>
+            <p className="price">{productById.price} €</p>
+            <div className="rating">⭐⭐⭐⭐⭐</div>
+            <p className="description">{productById.description}</p>
+            <div className="options">
+              {/* <button className="btn-red">Comprar</button> */}{" "}
+              {/* ver se vale a pena este botao */}
+              {productById && (
+                <button
+                  className="btn-black"
+                  onClick={() =>
+                    addToCart(productById.id, quantities[productById.id] || 1)
+                  }
+                >
+                  Adicionar ao carrinho
+                </button>
+              )}
+            </div>
+            <label>Quantidade:</label>
+            <input
+              className="input-detail"
+              type="number"
+              min="1"
+              value={quantities[productById.id] || 1} // valor atual ou 1 por default
+              onChange={(e) =>
+                setQuantities((prev) => ({
+                  ...prev,
+                  [productById.id]: Number(e.target.value),
+                }))
+              }
+            />
           </div>
-          <label>Quantidade:</label>
-            <input type="number" value="1" min="1" />
         </div>
       </div>
-      <div className="like-this-one">
-        more  products like this one
+      <div className="more-wrapper">
+        <div className="more">
+          {productById?.category?.id && (
+            <MoreLikeThis categoryId={productById.category.id} />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

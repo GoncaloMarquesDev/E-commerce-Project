@@ -1,12 +1,12 @@
-.grid-4-categories {
+.grid-4-all-categories {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(4, 1fr); /* desktop */
-  max-width: 1366px;
+  grid-template-columns: repeat(5, 1fr); /* desktop */
+ 
 
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr); /* tablet */
-    max-width: 1024px;
+   
   }
 
   @media (max-width: 300px) {
@@ -15,5 +15,11 @@
   }
 }
 .wrapper-products{
-margin-left: 60px;
+width: 1200px;
+}
+.all-products-pagination{
+  display: flex;
+  flex-direction: row;
+  
+  margin-top: 10px;
 }
