@@ -5,26 +5,28 @@
   text-align: center;
   transition: transform 0.2s ease;
   color: black;
-  max-width: 400px;
-  height: 450px; /* valor fixo */
-  overflow: hidden; /* corta o que passar do limite */
- 
+  
+  max-width: 200px;
+  /* height: 250px; */ /* valor fixo */
 
-  p{
+  p {
     color: #000000;
-     line-height: 2;
-     padding: 0px 10px 0px 10px;
-     text-decoration: solid;
+    line-height: 2;
+    padding: 0px 10px 0px 10px;
+    text-decoration: solid;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
-}
-@media(max-width:465px){
-.card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  text-align: center;
-  transition: transform 0.2s ease;
-  color: black;
-  max-width: 450px;
-}
+@media (max-width: 465px) {
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.2s ease;
+    color: black;
+    max-width: 450px;
+  }
 }

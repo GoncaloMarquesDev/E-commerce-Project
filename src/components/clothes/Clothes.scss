@@ -1,0 +1,33 @@
+.wrapper-clothes {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+
+  .title-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 1rem;
+    h2 {
+      text-align: left;
+    }
+  }
+
+  .grid-clothes {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    max-width: 1200px;
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}

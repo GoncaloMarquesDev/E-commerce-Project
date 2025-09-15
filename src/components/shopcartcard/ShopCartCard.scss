@@ -1,0 +1,79 @@
+.shopcard {
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.2s ease;
+
+
+  /* height: 250px; */ /* valor fixo */
+
+  /* p {
+    color: #000000;
+    line-height: 2;
+    padding: 0px 10px 0px 10px;
+    text-decoration: solid;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } */
+}
+/* @media (max-width: 465px) {
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.2s ease;
+    color: black;
+    max-width: 450px;
+    height: fit-content;
+  }
+} */
+.shop-card-container {
+ 
+  
+  border-radius: 5px;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+.shop-img {
+  padding: 10px 10px 10px 10px;
+  width: 200px;
+  img{
+     border-radius: 0;
+  }
+ 
+}
+  
+
+.shop-discription {
+  padding: 15px 10px 0px 10px;
+  display: flex;
+  flex-direction: column;
+  white-space: wrap; /* não deixa quebrar linha */
+  overflow: hidden; /* corta o excesso */
+  text-overflow: ellipsis; /* coloca "..." no fim */
+  align-items: flex-start;
+  text-align: justify;
+ p {
+  display: -webkit-box;        /* necessário para o -webkit-line-clamp */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;       /* Safari/Chrome/Edge */
+  line-clamp: 3;               /* versão padrão (quando suportada) */
+  overflow: hidden;            /* corta o resto */
+}
+}
+.shop-title{
+    font-size:1.2rem;
+}
+.shop-discription{
+   
+    font-size: .9rem;
+    font-weight: 100;
+}
+.shop-price-item{
+    padding: 85px 10px 0px 10px;
+    .price-color{
+      color: #e33628;
+    }
+}

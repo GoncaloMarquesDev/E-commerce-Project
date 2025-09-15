@@ -5,22 +5,25 @@
     font-size: 1.3rem;
   }
 }
-.wrapper {
+.products-wrapper {
   display: flex;
 
   flex-direction: column;
   margin: 60px;
-  width: 1366px;
+  width: 1200px;
+  
   margin-top: 70px;
-  @media (max-width: 768px) {
-    width: 768px;
-  }
+ 
+}
+.invisible {
+  visibility: hidden; /* ocupa espaço mas não aparece */
 }
 .cards_wrapper {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(4, 1fr); /* desktop */
-  max-width: 1366px;
+  grid-template-columns: repeat(5, 1fr); /* desktop */
+  
+  gap: .4rem;
 
   @media (max-width: 760px) {
     gap: 20px;
@@ -89,4 +92,6 @@
       font-size: 3rem;
     }
   }
+
+
 }
