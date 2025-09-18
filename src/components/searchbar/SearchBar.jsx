@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router";
+import "./SearchBar.scss"
 
 function SearchBar() {
   const [query, setQuery] = useState("");

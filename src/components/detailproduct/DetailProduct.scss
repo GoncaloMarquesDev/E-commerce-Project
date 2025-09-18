@@ -1,113 +1,162 @@
+@use "../../styles/variables" as variables;
 .wrapper-detail {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media (max-width: 768px) {
-    justify-content: space-between;
-  }
+  align-items: center;
 }
+
 .wrapper-detail-product {
   display: flex;
   gap: 2rem;
-  /* max-width: 1200px; */
   margin-top: 100px;
   padding: 1rem;
   justify-content: center;
   flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
 
-  @media (max-width: 768px) {
-    justify-content: center;
+  @media (max-width: 1024px) {
     flex-direction: column;
-    margin-left: 0px;
-    align-items: flex-start;
+    align-items: center;
+    gap: 1.5rem;
   }
 }
+
 .product-images {
   display: grid;
-  grid-template-columns: 163px 1fr;
+  grid-template-columns: 80px 1fr;
   gap: 1rem;
-  background-color: aqua;
-  width: 600px;
-  justify-items: end;
-}
+  max-width: 450px;
+  justify-items: center;
 
-.thumbnails {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  background-color: aqua;
-  width: 100px;
-  align-items: flex-end;
-  justify-content: flex-start;
-}
-.description {
-  text-align: justify;
-}
-
-.main-image img {
-  width: 400px;
-  object-fit: cover;
-  background-color: black;
-}
-.product-info {
-  width: 400px;
-}
-
-.product-info h2 {
-  margin-bottom: 0.5rem;
-  background-color: azure;
-}
-
-.product-info .price {
-  font-weight: bold;
-  font-size: larger;
-  color: #e33628;
-  margin-bottom: 0.5rem;
-}
-
-.product-info .rating {
-  margin-bottom: 1rem;
-}
-
-.options {
-  margin: .5rem 0;
-  /* padding: 10px; */
-}
-.like-this-one {
-  height: 50px;
-  color: #e33628;
-}
-.btn-red {
-  background-color: #e33628;
-  padding: 1px 10px 1px 10px;
-  border-radius: 4px;
-}
-.btn-black {
-  border-radius: 4px;
-  background-color: #000000;
-  padding: 1px 10px 1px 10px;
-
-  color: white;
-}
-.morewrapper{
-      width: 100%;
+  .thumbnails {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-}
-.more {
-     /* width: 1200px; */
-     margin: 50px 0px 0px 0px;
+    gap: 0.5rem;
+    width: 100px;
+    align-items: flex-end;
+    justify-content: flex-start;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .main-image img {
+    width: 400px;
+    object-fit: cover;
+    background-color: black;
+  }
+
+  @media (max-width: 768px) {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .main-image img {
+      width: 100%;
+    }
+
+    .thumbnails {
+      flex-direction: row;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+
+      img {
+        width: calc((100% - 1rem) / 3);
+        max-width: 400px;
+        object-fit: cover;
+      }
+    }
+  }
 }
-.input-detail{
+
+.product-info {
+  width: 400px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+  }
+
+  .price {
+    font-weight: bold;
+    font-size: 2rem;
+    color: variables.$color-span;
+    margin-bottom: 0.2rem;
+  }
+
+  .description {
+    text-align: justify;
+  }
+
+  .rating {
+    margin-bottom: 1rem;
+  }
+
+  .options {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+}
+
+.input-detail {
   width: 50px;
   text-align: center;
   border-radius: 5px;
-  
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.quantity-btn {
+  background: none;
+
+  &:hover {
+    border-color: transparent;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.btn-black {
+  border-radius: 4px;
+  background-color: #000000;
+  padding: 1px 10px;
+  color: white;
+}
+
+.like-this-one {
+  height: 50px;
+  color: variables.$color-span;
+}
+
+.morewrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.more {
+  margin: 50px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }

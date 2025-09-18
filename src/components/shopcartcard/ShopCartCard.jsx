@@ -1,31 +1,33 @@
 import Card from "../card/Card";
+import ShopCard from "../shopcard/ShopCard";
+
 import "./ShopCartCard.scss";
 
-function ShopCartCard({ imgSrc, itemName, price, quantity,discription }) {
-  //os componentes devem ser nomes no singular
+function ShopCartCard({ imgSrc, itemName, price, description }) {
   return (
     <div className="shopcard">
-      <Card>
-        {" "}
+      <ShopCard>
         <div className="shop-card-container">
-          <div className="shop-img" >
-            <img src={imgSrc} alt={"imagem produto"} />
+          {/* Imagem do produto */}
+          <div className="shop-img">
+            <img src={imgSrc} alt={itemName} />
           </div>
 
-          <div className="shop-discription">
+          {/* Descrição */}
+          <div className="shop-description">
             <p className="shop-title">{itemName}</p>
-            <p className="shop-discription">{discription}</p>
-            
-          
+            <p className="shop-text">{description}</p>
           </div>
+
+          {/* Preço */}
           <div className="shop-price-item">
             <p>Price</p>
             <p className="price-color">{price} €</p>
-            
           </div>
         </div>
-      </Card>
+      </ShopCard>
     </div>
   );
 }
+
 export default ShopCartCard;

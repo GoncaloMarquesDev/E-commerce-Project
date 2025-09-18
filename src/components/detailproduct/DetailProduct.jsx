@@ -1,21 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import "./DetailProduct.scss";
+ import "./DetailProduct.scss";
 import MoreLikeThis from "../morelikethis/MoreLikeThis";
 import { CartContext } from "../../context/CartContext";
 
-
-
 function DetailProduct() {
-  
-
   const { id } = useParams();
+  console.log("id",id)
   const [productById, setProductById] = useState(null);
 
-  const { addToCart, quantities, setQuantities } = useContext(CartContext);
+  const { addToCart, quantities, cart } = useContext(CartContext);
 
-  const moreLikeThis = productById?.category?.id;
-  console.log("moreLikeThis no detail", moreLikeThis);
+  // Quantidade local temporária antes de adicionar ao carrinho
+  const [localQuantity, setLocalQuantity] = useState(0);
 
   useEffect(() => {
     const fetchProductById = async () => {
@@ -33,14 +30,19 @@ function DetailProduct() {
     fetchProductById();
   }, [id]);
 
+  // Inicializa localQuantity a partir do carrinho
+  useEffect(() => {
+    setLocalQuantity(quantities[id] || 0);
+  }, [id, quantities]);
+
   if (!productById) return <p>Loading...</p>;
+
+  const inCart = cart.some((item) => item.id === productById.id);
 
   return (
     <>
-      {" "}
       <div className="wrapper-detail">
         <div className="wrapper-detail-product">
-          {/* coluna da esquerda: imagens */}
           <div className="product-images">
             <div className="thumbnails">
               {productById.images.map((img, index) => (
@@ -59,42 +61,53 @@ function DetailProduct() {
             </div>
           </div>
 
-          {/* coluna da direita: informações */}
           <div className="product-info">
             <h2>{productById.title}</h2>
             <p className="price">{productById.price} €</p>
-            <div className="rating">⭐⭐⭐⭐⭐</div>
             <p className="description">{productById.description}</p>
+
             <div className="options">
-              {/* <button className="btn-red">Comprar</button> */}{" "}
-              {/* ver se vale a pena este botao */}
-              {productById && (
-                <button
-                  className="btn-black"
-                  onClick={() =>
-                    addToCart(productById.id, quantities[productById.id] || 1)
-                  }
-                >
-                  Adicionar ao carrinho
-                </button>
-              )}
+              {/* Botão Add to cart */}
+              <button
+                className="btn-black"
+                onClick={() => addToCart(productById.id, localQuantity)}
+              >
+                Add to cart
+              </button>
+
+              {/* Botões de quantidade sempre visíveis */}
+              <button
+                className="quantity-btn"
+                type="button"
+                onClick={() =>
+                  setLocalQuantity(Math.max(0, localQuantity - 1))
+                }
+              >
+                -
+              </button>
+
+              <input
+                className="input-detail"
+                type="number"
+                min="0"
+                value={localQuantity}
+                onChange={(e) =>
+                  setLocalQuantity(Math.max(0, Number(e.target.value)))
+                }
+              />
+
+              <button
+                className="quantity-btn"
+                type="button"
+                onClick={() => setLocalQuantity(localQuantity + 1)}
+              >
+                +
+              </button>
             </div>
-            <label>Quantidade:</label>
-            <input
-              className="input-detail"
-              type="number"
-              min="1"
-              value={quantities[productById.id] || 1} // valor atual ou 1 por default
-              onChange={(e) =>
-                setQuantities((prev) => ({
-                  ...prev,
-                  [productById.id]: Number(e.target.value),
-                }))
-              }
-            />
           </div>
         </div>
       </div>
+
       <div className="more-wrapper">
         <div className="more">
           {productById?.category?.id && (

@@ -1,36 +1,56 @@
-import "./Nav.scss";
+import { NavLink } from "react-router";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router";
 import SearchBar from "../searchbar/SearchBar";
+import { PiShoppingCartSimpleLight } from "react-icons/pi";
+import { useContext, useState } from "react";
+import { CartContext } from "../../context/CartContext";
+import "../nav/Nav.scss";
 
 function Nav() {
+  const { cart } = useContext(CartContext);
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  // Estado do hamburger
+  const [menuActive, setMenuActive] = useState(false);
+
   return (
     <div className="nav_wrapper">
       <div className="nav">
-        <img className="logo" src={logo} alt="" />
+        <img className="logo" src={logo} alt="Logo" />
 
-        <div className="nav-flex">
-          <ul className="nav-links">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/">About</Link>
-            </li>
-          </ul>
+        {/* Hamburger */}
+        <div
+          className="menu-toggle"
+          onClick={() => setMenuActive(!menuActive)}
+        >
+          &#9776;
+        </div>
 
-          <ul className="nav-items">
-            <SearchBar />
-            <li>
-              <Link to="/">Log in</Link>
-            </li>
-            <li>
-              <Link to="/cart">Shop Cart</Link>
-            </li>
-          </ul>
+        {/* Links que entram no hamburger */}
+        <ul className={`nav-links ${menuActive ? "active" : ""}`}>
+          <li><NavLink to="/">Home</NavLink ></li>
+          <li><NavLink to="/category/1">Clothes </NavLink></li>
+          <li><NavLink to="/category/2">Electronics</NavLink></li>
+          <li><NavLink to="/category/3">Furniture</NavLink></li>
+          <li><NavLink to="/category/4">Shoes</NavLink></li>
+        </ul>
+
+        {/* Itens fixos da navbar */}
+        <div className="nav-items">
+          <SearchBar />
+          <li className="cart-icon">
+            <Link to="/cart">
+              <PiShoppingCartSimpleLight size={40} />
+              {totalItems > 0 && (
+                <span className="cart-badge">{totalItems}</span>
+              )}
+            </Link>
+          </li>
         </div>
       </div>
     </div>
   );
 }
+
 export default Nav;

@@ -1,13 +1,18 @@
 .wrapper-clothes {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  margin-top: 30px;
+  margin-left: 50px;
+
+
+  @media (max-width: 768px) {
+    margin-top: 50px;
+  }
 
   .title-container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1220px;
     margin-bottom: 1rem;
     h2 {
       text-align: left;
@@ -20,6 +25,7 @@
     grid-template-columns: repeat(5, 1fr);
     width: 100%;
     max-width: 1200px;
+
     @media (max-width: 1024px) {
       grid-template-columns: repeat(3, 1fr);
     }

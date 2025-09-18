@@ -1,5 +1,5 @@
-import "./Card.scss" 
-function Card({ children, label,flag}) {
+import "./ShopCard.scss" 
+function ShopCard({ children, label,flag}) {
   return (
     <div className="img-border-radius" >
       {children}
@@ -8,4 +8,4 @@ function Card({ children, label,flag}) {
     </div>
   );
 }
-export default Card;
+export default ShopCard;

@@ -1,0 +1,13 @@
+@use "variables" as variables;
+@mixin button-base($bg, $color) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border-radius: variables.$button-radius;
+  border: 1px solid transparent;
+  background-color: $bg;
+  color: $color;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
