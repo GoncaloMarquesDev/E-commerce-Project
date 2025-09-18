@@ -16,18 +16,18 @@
  
 }
 .invisible {
-  visibility: hidden; /* ocupa espaço mas não aparece */
+  visibility: hidden; 
 }
 .cards_wrapper {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(5, 1fr); /* desktop */
+  grid-template-columns: repeat(5, 1fr); 
   
   gap: .4rem;
 
   @media (max-width: 760px) {
     gap: 20px;
-    grid-template-columns: repeat(2, 1fr); /* desktop */
+    grid-template-columns: repeat(2, 1fr); 
     flex-wrap: wrap;
   }
 }

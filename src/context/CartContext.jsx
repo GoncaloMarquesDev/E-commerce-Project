@@ -1,39 +1,52 @@
-import { createContext, useState, useEffect, useContext } from "react";
-const CartContext = createContext(null);
+import { createContext, useState } from "react";
 
-function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  console.log("shopcartItem", cart);
+export const CartContext = createContext();
 
-  const [quantities, setQuantities] = useState({});
+export function CartProvider({ children }) {
+  const [cart, setCart] = useState([]); // {id, quantity}
+  const [quantities, setQuantities] = useState({}); // { [id]: quantity }
 
-  function updateCartQuantity(productId, quantity) {
-    setCart((prev) =>
-      prev.map((item) => (item.id === productId ? { ...item, quantity } : item))
-    );
-  }
-
-  function addToCart(productId, quantity) {
+  const addToCart = (id, quantity = 1) => {
+    if (quantity <= 0) return; // não adiciona zero
     setCart((prev) => {
-      const exists = prev.find((item) => item.id === productId);
-
+      const exists = prev.find((item) => item.id === id);
       if (exists) {
         return prev.map((item) =>
-          item.id === productId
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
+          item.id === id ? { ...item, quantity: quantity } : item
         );
+      } else {
+        return [...prev, { id, quantity }];
       }
-
-      return [...prev, { id: productId, quantity }];
     });
-  }
+    setQuantities((prev) => ({ ...prev, [id]: quantity }));
+  };
+
+  const updateCartQuantity = (id, quantity) => {
+    setQuantities((prev) => {
+      const copy = { ...prev };
+      if (quantity <= 0) {
+        delete copy[id]; // remove do objeto quantities
+      } else {
+        copy[id] = quantity;
+      }
+      return copy;
+    });
+
+    setCart((prev) => {
+      if (quantity <= 0) {
+        return prev.filter((item) => item.id !== id); // remove do array
+      }
+      return prev.map((item) =>
+        item.id === id ? { ...item, quantity } : item
+      );
+    });
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, quantities, setQuantities, updateCartQuantity }}
+      value={{ cart, quantities, setQuantities, addToCart, updateCartQuantity }}
     >
       {children}
     </CartContext.Provider>
   );
 }
-export { CartContext, CartProvider };

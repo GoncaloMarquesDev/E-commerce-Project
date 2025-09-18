@@ -1,0 +1,23 @@
+@use "../../styles/variables" as variables;
+
+.searchbar-container {
+  position: relative;
+}
+.search-bar-input {
+  border-radius: variables.$radius-default;
+  padding: 0px 0px 0px 10px;
+  width: 300px;
+  @media(max-width:607px){
+     width: 100%;
+  }
+}
+
+.searchbar-dropdown {
+  position: absolute; 
+  top: 100%; 
+  left: 0;
+  width: 100%; 
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 1000;
+}

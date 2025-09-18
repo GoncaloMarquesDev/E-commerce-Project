@@ -1,12 +1,57 @@
-.img-border-radius img {
-  border-radius: 10px 10px 0px 0px; // círculo perfeito se for quadrada
-    padding-bottom: 10px;
-    text-align: justify;
-   
-  /*   max-height: 100px;
-    object-fit:fill;
-    align-items: center; */
-     
-   
-   
+.img-border-radius {
+  width: 100%;
+  height: 220px;       // altura fixa para todos os cards
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+
+  img {
+    width: 100%;
+    height: 100%;      // ocupa toda a altura do container
+    object-fit: cover; // mantém proporção e corta o excesso
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 }
+
+@media (max-width: 768px) {
+  .img-border-radius {
+    height: 180px;
+
+    img {
+      margin-bottom: 0.4rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .img-border-radius {
+    height: 150px;
+
+    img {
+      margin-bottom: 0.3rem;
+    }
+  }
+}
+/* .img-border-radius img {
+  width: 100%;             
+  height: auto;            
+  border-radius: 10px 10px 0 0; 
+  object-fit: cover;       
+  margin-bottom: 0.5rem;   
+  display: block;          
+}
+
+
+@media (max-width: 768px) {
+  .img-border-radius img {
+    margin-bottom: 0.4rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .img-border-radius img {
+    margin-bottom: 0.3rem;
+  }
+}
+ */

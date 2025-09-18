@@ -3,38 +3,65 @@
   color: rgb(255, 255, 255);
   margin-top: 100px;
   display: flex;
-  justify-content: left;
-
+  justify-content: center; 
+  padding: 20px 2rem;
 }
+
 .footer {
-  padding-top: 20px;
-  padding-bottom: 20px;
   display: grid;
   grid-template-areas: "products resources subscribe";
   grid-template-columns: 1fr 1fr 1fr;
- margin-left: 60px;
   max-width: 1200px;
+  width: 100%;
+  gap: 2rem; 
 }
+
 .footer_products {
   grid-area: products;
 }
+
 .footer_resources {
   grid-area: resources;
 }
+
 .footer_subscribe {
   grid-area: subscribe;
 }
+
 .footer h6 {
-  font-size: 14px; /* maior */
-  font-weight: bold; /* mais grosso */
-  margin-bottom: 15px; /* espaço entre título e links */
+  font-size: 14px; 
+  font-weight: bold;
+  margin-bottom: 15px;
 }
+
+.footer ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+}
+
+.footer li {
+  margin-bottom: 10px; 
+}
+
+.footer a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* MOBILE */
 @media (max-width: 700px) {
   .footer {
     grid-template-areas:
       "products"
       "resources"
-      "subscribe"; /* ficam em coluna */
+      "subscribe";
     grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
   }
 }
