@@ -7,7 +7,6 @@ function LandingPage() {
   return (
     <div className="landing-wrapper">
       {" "}
-     {/*  <ProductsWrapper /> */}
       <AllCategories />
       <Footer />
     </div>

@@ -1,4 +1,3 @@
-
 import "./Loader.scss";
 
 function Loader() {

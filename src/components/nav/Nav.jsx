@@ -11,7 +11,6 @@ function Nav() {
   const { cart } = useContext(CartContext);
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
-  // Estado do hamburger
   const [menuActive, setMenuActive] = useState(false);
 
   return (
@@ -19,24 +18,28 @@ function Nav() {
       <div className="nav">
         <img className="logo" src={logo} alt="Logo" />
 
-        {/* Hamburger */}
-        <div
-          className="menu-toggle"
-          onClick={() => setMenuActive(!menuActive)}
-        >
+        <div className="menu-toggle" onClick={() => setMenuActive(!menuActive)}>
           &#9776;
         </div>
 
-        {/* Links que entram no hamburger */}
         <ul className={`nav-links ${menuActive ? "active" : ""}`}>
-          <li><NavLink to="/">Home</NavLink ></li>
-          <li><NavLink to="/category/1">Clothes </NavLink></li>
-          <li><NavLink to="/category/2">Electronics</NavLink></li>
-          <li><NavLink to="/category/3">Furniture</NavLink></li>
-          <li><NavLink to="/category/4">Shoes</NavLink></li>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/category/1">Clothes </NavLink>
+          </li>
+          <li>
+            <NavLink to="/category/2">Electronics</NavLink>
+          </li>
+          <li>
+            <NavLink to="/category/3">Furniture</NavLink>
+          </li>
+          <li>
+            <NavLink to="/category/4">Shoes</NavLink>
+          </li>
         </ul>
 
-        {/* Itens fixos da navbar */}
         <div className="nav-items">
           <SearchBar />
           <li className="cart-icon">

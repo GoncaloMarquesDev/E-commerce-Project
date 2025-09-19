@@ -1,13 +1,13 @@
 .img-border-radius {
   width: 100%;
-  height: 220px;       // altura fixa para todos os cards
+  height: 240px;
   overflow: hidden;
   border-radius: 10px 10px 0 0;
 
   img {
     width: 100%;
-    height: 100%;      // ocupa toda a altura do container
-    object-fit: cover; // mantém proporção e corta o excesso
+    height: 100%;
+    object-fit: cover;
     display: block;
     margin-bottom: 0.5rem;
   }
@@ -25,33 +25,10 @@
 
 @media (max-width: 480px) {
   .img-border-radius {
-    height: 150px;
+    height: 260px;
 
     img {
       margin-bottom: 0.3rem;
     }
   }
 }
-/* .img-border-radius img {
-  width: 100%;             
-  height: auto;            
-  border-radius: 10px 10px 0 0; 
-  object-fit: cover;       
-  margin-bottom: 0.5rem;   
-  display: block;          
-}
-
-
-@media (max-width: 768px) {
-  .img-border-radius img {
-    margin-bottom: 0.4rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .img-border-radius img {
-    margin-bottom: 0.3rem;
-  }
-}
- */

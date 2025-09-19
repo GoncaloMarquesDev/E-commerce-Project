@@ -12,5 +12,15 @@
 
 .carousel-item {
   flex-shrink: 0;
-  width: 200px; // pode ajustar
+  width: 210px; // pode ajustar
+  @media (max-width: 1024px) {
+    width: 195px;
+  }
+
+  @media (max-width: 768px) {
+    width: 170px;
+  }
+  @media (max-width: 607px) {
+    width: 130px;
+  }
 }

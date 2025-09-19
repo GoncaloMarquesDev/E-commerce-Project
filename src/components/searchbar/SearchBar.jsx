@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router";
-import "./SearchBar.scss"
+import "./SearchBar.scss";
 
 function SearchBar() {
   const [query, setQuery] = useState("");
@@ -12,7 +12,6 @@ function SearchBar() {
 
   const wrapperRef = useRef(null);
 
-  // Fecha dropdown ao clicar fora
   useEffect(() => {
     function handleClickOutside(event) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -25,7 +24,6 @@ function SearchBar() {
     };
   }, []);
 
-  // Puxa todos os produtos uma vez ao montar
   useEffect(() => {
     const fetchAllProducts = async () => {
       setLoading(true);
@@ -44,7 +42,6 @@ function SearchBar() {
     fetchAllProducts();
   }, []);
 
-  // Filtra produtos conforme o usuário digita
   useEffect(() => {
     if (query.trim().length < 2) {
       setResults([]);
@@ -52,7 +49,7 @@ function SearchBar() {
       return;
     }
 
-    const filtered = allProducts.filter(product =>
+    const filtered = allProducts.filter((product) =>
       product.title.toLowerCase().includes(query.toLowerCase())
     );
     setResults(filtered);

@@ -31,12 +31,12 @@ function ProductsWrapper() {
           </Link>
         </div>
         <div className="products_card furniture">
-           <Link to="/category/4">
-          <ProductCard
-            header="4"
-            text1="Category"
-            text2="Shoes"
-          ></ProductCard>
+          <Link to="/category/4">
+            <ProductCard
+              header="4"
+              text1="Category"
+              text2="Shoes"
+            ></ProductCard>
           </Link>
         </div>
         <div className="card invisible"></div>
