@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png";
 import { Link } from "react-router";
 import SearchBar from "../searchbar/SearchBar";
 import { PiShoppingCartSimpleLight } from "react-icons/pi";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { CartContext } from "../../context/CartContext";
 import "../nav/Nav.scss";
 
@@ -12,12 +12,26 @@ function Nav() {
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const [menuActive, setMenuActive] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuActive(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="nav_wrapper">
+    <div className="nav_wrapper" ref={menuRef}>
       <div className="nav">
         <img className="logo" src={logo} alt="Logo" />
 
+        {/* Hamburger no mesmo sítio que estava */}
         <div className="menu-toggle" onClick={() => setMenuActive(!menuActive)}>
           &#9776;
         </div>
