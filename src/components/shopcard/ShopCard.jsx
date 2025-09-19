@@ -1,7 +1,7 @@
-import "./ShopCard.scss" 
-function ShopCard({ children, label,flag}) {
+import "./ShopCard.scss";
+function ShopCard({ children, label, flag }) {
   return (
-    <div className="img-border-radius" >
+    <div className="img-border-radius">
       {children}
       {label}
       <img src={flag} alt="" />

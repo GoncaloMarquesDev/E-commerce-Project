@@ -9,8 +9,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
- 
- 
 
   @media (max-width: 768px) {
     margin-top: 50px;
@@ -35,24 +33,30 @@
   display: grid;
   gap: 1rem;
   width: 100%;
+  padding-left: 10px;
 
-  /* grid responsiva automática com largura mínima confortável */
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  grid-template-columns: repeat(5, 1fr);
 
   @media (max-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
     gap: 0.8rem;
   }
 
   @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
     gap: 0.6rem;
   }
 
   @media (max-width: 480px) {
-    gap: 0.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
   }
 }
 
-/* Mantém a paginação centrada */
+
 .all-products-pagination {
   display: flex;
   flex-direction: row;

@@ -1,7 +1,7 @@
-import "./Card.scss" 
-function Card({ children, label,flag}) {
+import "./Card.scss";
+function Card({ children, label, flag }) {
   return (
-    <div className="img-border-radius" >
+    <div className="img-border-radius">
       {children}
       {label}
       <img src={flag} alt="" />

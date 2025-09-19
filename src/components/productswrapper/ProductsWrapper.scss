@@ -11,23 +11,22 @@
   flex-direction: column;
   margin: 60px;
   width: 1200px;
-  
+
   margin-top: 70px;
- 
 }
 .invisible {
-  visibility: hidden; 
+  visibility: hidden;
 }
 .cards_wrapper {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(5, 1fr); 
-  
-  gap: .4rem;
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 0.4rem;
 
   @media (max-width: 760px) {
     gap: 20px;
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
     flex-wrap: wrap;
   }
 }
@@ -92,6 +91,4 @@
       font-size: 3rem;
     }
   }
-
-
 }

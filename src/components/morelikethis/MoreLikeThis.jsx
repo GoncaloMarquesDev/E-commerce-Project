@@ -40,7 +40,7 @@ function MoreLikeThis({ categoryId }) {
                   imgSrc={item.images?.[0]}
                   itemName={item.title}
                   price={item.price}
-                  noHover // Prop para desativar hover de escala neste contexto
+                  noHover
                 />
               </div>
             </Link>

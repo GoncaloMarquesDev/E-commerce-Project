@@ -3,11 +3,11 @@ import { createContext, useState } from "react";
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]); // {id, quantity}
-  const [quantities, setQuantities] = useState({}); // { [id]: quantity }
+  const [cart, setCart] = useState([]); //
+  const [quantities, setQuantities] = useState({}); //
 
   const addToCart = (id, quantity = 1) => {
-    if (quantity <= 0) return; // não adiciona zero
+    if (quantity <= 0) return;
     setCart((prev) => {
       const exists = prev.find((item) => item.id === id);
       if (exists) {
@@ -25,7 +25,7 @@ export function CartProvider({ children }) {
     setQuantities((prev) => {
       const copy = { ...prev };
       if (quantity <= 0) {
-        delete copy[id]; // remove do objeto quantities
+        delete copy[id];
       } else {
         copy[id] = quantity;
       }
@@ -34,7 +34,7 @@ export function CartProvider({ children }) {
 
     setCart((prev) => {
       if (quantity <= 0) {
-        return prev.filter((item) => item.id !== id); // remove do array
+        return prev.filter((item) => item.id !== id);
       }
       return prev.map((item) =>
         item.id === id ? { ...item, quantity } : item

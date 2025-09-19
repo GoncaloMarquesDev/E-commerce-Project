@@ -1,4 +1,4 @@
-import "./CategoriesCard.scss"; 
+import "./CategoriesCard.scss";
 function CategoriesCard({ children, header, text1, text2 }) {
   return (
     <div className="product_card">

@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
- import "./DetailProduct.scss";
+import "./DetailProduct.scss";
 import MoreLikeThis from "../morelikethis/MoreLikeThis";
 import { CartContext } from "../../context/CartContext";
 
 function DetailProduct() {
   const { id } = useParams();
-  console.log("id",id)
+  console.log("id", id);
   const [productById, setProductById] = useState(null);
 
   const { addToCart, quantities, cart } = useContext(CartContext);
@@ -30,7 +30,6 @@ function DetailProduct() {
     fetchProductById();
   }, [id]);
 
-  // Inicializa localQuantity a partir do carrinho
   useEffect(() => {
     setLocalQuantity(quantities[id] || 0);
   }, [id, quantities]);
@@ -67,7 +66,6 @@ function DetailProduct() {
             <p className="description">{productById.description}</p>
 
             <div className="options">
-              {/* Botão Add to cart */}
               <button
                 className="btn-black"
                 onClick={() => addToCart(productById.id, localQuantity)}
@@ -75,13 +73,10 @@ function DetailProduct() {
                 Add to cart
               </button>
 
-              {/* Botões de quantidade sempre visíveis */}
               <button
                 className="quantity-btn"
                 type="button"
-                onClick={() =>
-                  setLocalQuantity(Math.max(0, localQuantity - 1))
-                }
+                onClick={() => setLocalQuantity(Math.max(0, localQuantity - 1))}
               >
                 -
               </button>

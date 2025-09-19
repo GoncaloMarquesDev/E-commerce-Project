@@ -10,14 +10,17 @@
   gap: 10px;
 
   @media (max-width: 1024px) {
+    width: 800px;
     gap: 8px;
   }
 
   @media (max-width: 768px) {
+    width: 700px;
     gap: 5px;
   }
 
   @media (max-width: 607px) {
+    width: 300px;
     gap: 2px;
   }
 
