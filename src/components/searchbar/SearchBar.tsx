@@ -1,20 +1,24 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router";
 import "./SearchBar.scss";
+import type { Product } from "../../types/products";
 
 function SearchBar() {
-  const [query, setQuery] = useState("");
-  const [allProducts, setAllProducts] = useState([]);
-  const [results, setResults] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [query, setQuery] = useState<string>("");
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [results, setResults] = useState<Product[]>([]);
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
         setShowDropdown(false);
       }
     }
@@ -25,12 +29,12 @@ function SearchBar() {
   }, []);
 
   useEffect(() => {
-    const fetchAllProducts = async () => {
+    const fetchAllProducts = async (): Promise<void> => {
       setLoading(true);
       try {
         const res = await fetch("https://api.escuelajs.co/api/v1/products");
         if (!res.ok) throw new Error("Error fetching products");
-        const data = await res.json();
+        const data: Product[] = await res.json();
         setAllProducts(data);
       } catch (err) {
         console.error(err);
@@ -66,7 +70,9 @@ function SearchBar() {
       <input
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setQuery(e.target.value)
+        }
         placeholder="Search products..."
         className="search-bar-input"
       />
@@ -81,7 +87,7 @@ function SearchBar() {
           {!loading &&
             !error &&
             results.map((item) => (
-              <li key={item.id} onClick={handleSelect}>
+              <li key={item.id}>
                 <Link to={`/detail/${item.id}`} onClick={handleSelect}>
                   {item.title}
                 </Link>

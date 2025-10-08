@@ -1,16 +1,27 @@
-import Card from "../card/Card";
+/* import Card from "../card/Card"; */
 import ShopCard from "../shopcard/ShopCard";
 
 import "./ShopCartCard.scss";
+interface ShopCartCardProps {
+  imgSrc: string;
+  itemName: string;
+  price: number;
+  description: string;
+}
 
-function ShopCartCard({ imgSrc, itemName, price, description }) {
+function ShopCartCard({
+  imgSrc,
+  itemName,
+  price,
+  description,
+}: ShopCartCardProps) {
   return (
     <div className="shopcard">
       <ShopCard>
         <div className="shop-card-container">
           {/* Imagem do produto */}
           <div className="shop-img">
-            <img src={imgSrc} alt={itemName} />
+            <img src={imgSrc || "/placeholder.png"} alt={itemName} />
           </div>
 
           {/* Descrição */}

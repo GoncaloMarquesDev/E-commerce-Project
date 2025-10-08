@@ -1,5 +1,17 @@
+import type { ReactNode } from "react";
 import "./CategoriesCard.scss";
-function CategoriesCard({ children, header, text1, text2 }) {
+interface CategoriesCardProps {
+  children?: ReactNode;
+  header?: string;
+  text1?: string;
+  text2?: string;
+}
+function CategoriesCard({
+  children,
+  header,
+  text1,
+  text2,
+}: CategoriesCardProps) {
   return (
     <div className="product_card">
       {children}

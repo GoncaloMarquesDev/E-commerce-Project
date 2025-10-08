@@ -3,26 +3,30 @@ import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router";
 import ShopCartCard from "../shopcartcard/ShopCartCard";
 import "./ShopCart.scss";
+import type { Product } from "../../types/products";
 
 function ShopCart() {
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState<Product[]>([]);
   const { cart, updateCartQuantity } = useContext(CartContext);
 
+  // Calcula o preço total
   const totalPrice = cartProducts.reduce((acc, product) => {
-    const cartItem = cart.find((c) => c.id === product.id);
+    const cartItem = cart.find((c) => c.id === product.id.toString());
     if (!cartItem) return acc;
     return acc + product.price * cartItem.quantity;
   }, 0);
 
   useEffect(() => {
-    const fetchCartProducts = async () => {
+    const fetchCartProducts = async (): Promise<void> => {
       try {
         const results = await Promise.all(
-          cart.map(async (item) => {
+          cart.map(async (cartItem) => {
             const res = await fetch(
-              `https://api.escuelajs.co/api/v1/products/${item.id}`
+              `https://api.escuelajs.co/api/v1/products/${cartItem.id}`
             );
-            return await res.json();
+            if (!res.ok) throw new Error("Error fetching product");
+            const product: Product = await res.json();
+            return product;
           })
         );
         setCartProducts(results);
@@ -45,18 +49,18 @@ function ShopCart() {
           <p className="empty-cart">Empty Shop Cart</p>
         ) : (
           <div className="flex-shop">
-            {cartProducts.map((item) => {
-              const cartItem = cart.find((c) => c.id === item.id);
+            {cartProducts.map((product) => {
+              const cartItem = cart.find((c) => c.id === product.id.toString());
               if (!cartItem || cartItem.quantity <= 0) return null;
 
               return (
-                <div className="card-wrapper-shop" key={item.id}>
-                  <Link to={`/detail/${item.id}`} className="shopcard-link">
+                <div className="card-wrapper-shop" key={product.id}>
+                  <Link to={`/detail/${product.id}`} className="shopcard-link">
                     <ShopCartCard
-                      imgSrc={item.images?.[0]}
-                      itemName={item.title}
-                      price={item.price}
-                      description={item.description}
+                      imgSrc={product.images?.[0]}
+                      itemName={product.title}
+                      price={product.price}
+                      description={product.description}
                     />
 
                     <div className="quantity-control">
@@ -65,8 +69,8 @@ function ShopCart() {
                         onClick={(e) => {
                           e.preventDefault();
                           updateCartQuantity(
-                            item.id,
-                            (cartItem.quantity || 0) - 1
+                            product.id.toString(),
+                            cartItem.quantity - 1
                           );
                         }}
                       >
@@ -75,13 +79,13 @@ function ShopCart() {
 
                       <input
                         type="number"
-                        value={cartItem.quantity}
                         min="0"
+                        value={cartItem.quantity}
                         onChange={(e) => {
-                          e.preventDefault();
+                          const newQuantity = Number(e.target.value);
                           updateCartQuantity(
-                            item.id,
-                            Number(e.target.value)
+                            product.id.toString(),
+                            newQuantity
                           );
                         }}
                       />
@@ -91,8 +95,8 @@ function ShopCart() {
                         onClick={(e) => {
                           e.preventDefault();
                           updateCartQuantity(
-                            item.id,
-                            (cartItem.quantity || 0) + 1
+                            product.id.toString(),
+                            cartItem.quantity + 1
                           );
                         }}
                       >
@@ -108,11 +112,9 @@ function ShopCart() {
 
         <div className="sidebar">
           <div className="price-container">
-            <p className="cart-total">{totalPrice.toFixed(2)} € : Total </p>
+            <p className="cart-total">{totalPrice.toFixed(2)} € : Total</p>
             <p>
-              <span>
-                {cart.reduce((acc, item) => acc + item.quantity, 0)}
-              </span>{" "}
+              <span>{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>{" "}
               : Items in cart
             </p>
             <button className="shop-cart-btn">BUY</button>

@@ -1,6 +1,6 @@
 import AllCategories from "../allcategories/AllCategories";
 import Footer from "../footer/Footer";
-import ProductsWrapper from "../productswrapper/ProductsWrapper";
+/* import ProductsWrapper from "../productswrapper/ProductsWrapper"; */
 import "./LandingPage.scss";
 
 function LandingPage() {
