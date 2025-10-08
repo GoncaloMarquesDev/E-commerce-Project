@@ -11,12 +11,12 @@ function Nav() {
   const { cart } = useContext(CartContext);
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
-  const [menuActive, setMenuActive] = useState(false);
-  const menuRef = useRef(null);
+  const [menuActive, setMenuActive] = useState<boolean>(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setMenuActive(false);
       }
     };

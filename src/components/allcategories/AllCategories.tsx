@@ -4,25 +4,26 @@ import "../allcategories/AllCategories.scss";
 import { Link } from "react-router";
 import ProductCard from "../productcard/ProductCard";
 import Loader from "../loader/Loader";
+import type { Product } from "../../types/products";
 
 function AllCategories() {
-  const [allProducts, setAllProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   console.log("allProducts", allProducts);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   /* paginacao */
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
   const limit = 10;
 
   useEffect(() => {
-    const fetchAllProducts = async () => {
+    const fetchAllProducts = async (): Promise<void> => {
       const offset = (page - 1) * limit;
       setLoading(true);
       try {
         const data = await fetch(
           `https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`
         );
-        const allproducts = await data.json();
+        const allproducts: Product[] = await data.json();
         setAllProducts(allproducts);
       } catch (error) {
         console.error("Error searching products:", error);
@@ -40,10 +41,10 @@ function AllCategories() {
         <Loader />
       ) : (
         <div className="grid-all-categories">
-          {allProducts.map((product) => (
+          {allProducts.map((product: Product) => (
             <Link to={`/detail/${product.id}`} key={product.id}>
               <ProductCard
-                imgSrc={product.category.image}
+                imgSrc={product.images?.[0] || "/placeholder.png"}
                 itemName={product.title}
                 price={product.price}
               />

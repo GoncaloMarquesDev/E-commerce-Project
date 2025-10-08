@@ -3,24 +3,27 @@ import { useParams } from "react-router";
 import "./DetailProduct.scss";
 import MoreLikeThis from "../morelikethis/MoreLikeThis";
 import { CartContext } from "../../context/CartContext";
+import type { Product } from "../../types/products";
 
 function DetailProduct() {
-  const { id } = useParams();
-  console.log("id", id);
-  const [productById, setProductById] = useState(null);
+  const { id } = useParams<{ id: string }>();
+  const [productById, setProductById] = useState<Product | null>(null);
 
-  const { addToCart, quantities, cart } = useContext(CartContext);
+  const { addToCart, quantities } = useContext(CartContext);
 
-  // Quantidade local temporária antes de adicionar ao carrinho
-  const [localQuantity, setLocalQuantity] = useState(0);
+  const [localQuantity, setLocalQuantity] = useState<number>(0);
 
   useEffect(() => {
-    const fetchProductById = async () => {
+    if (!id) return;
+    const fetchProductById = async (): Promise<void> => {
       try {
         const data = await fetch(
           `https://api.escuelajs.co/api/v1/products/${id}`
         );
-        const resultProductById = await data.json();
+        if (!data.ok) {
+          throw new Error("Error searching product");
+        }
+        const resultProductById: Product = await data.json();
         setProductById(resultProductById);
       } catch (error) {
         console.error("Error fetching item:", error);
@@ -31,12 +34,12 @@ function DetailProduct() {
   }, [id]);
 
   useEffect(() => {
-    setLocalQuantity(quantities[id] || 0);
+    if (id && quantities) {
+      setLocalQuantity(quantities[id] || 0);
+    }
   }, [id, quantities]);
 
   if (!productById) return <p>Loading...</p>;
-
-  const inCart = cart.some((item) => item.id === productById.id);
 
   return (
     <>
@@ -44,18 +47,22 @@ function DetailProduct() {
         <div className="wrapper-detail-product">
           <div className="product-images">
             <div className="thumbnails">
-              {productById.images.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`${productById.title} ${index}`}
-                />
-              ))}
+              {productById.images.length > 0 ? (
+                productById.images.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`${productById.title} ${index}`}
+                  />
+                ))
+              ) : (
+                <img src="/placeholder.png" alt="No image available" />
+              )}
             </div>
             <div className="main-image">
               <img
-                src={productById.category.image}
-                alt={productById.category.name}
+                src={productById.images[0] || "/placeholder.png"}
+                alt={productById.title}
               />
             </div>
           </div>
@@ -68,7 +75,7 @@ function DetailProduct() {
             <div className="options">
               <button
                 className="btn-black"
-                onClick={() => addToCart(productById.id, localQuantity)}
+                onClick={() => addToCart(String(productById.id), localQuantity)}
               >
                 Add to cart
               </button>
