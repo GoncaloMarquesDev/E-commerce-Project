@@ -11,16 +11,16 @@ import Categories from "./components/categories/Categories";
 import { CartProvider } from "./context/CartContext";
 import ShopCart from "./components/shopcart/ShopCart";
 import NotFound from "./components/notfound/NotFound";
-import { ToastProvider } from "./components/ui/ToastProvider.TSX";
+import { ToastProvider } from "./components/ui/ToastProvider.tsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <CartProvider>
       <BrowserRouter>
-      <ToastProvider/>
+        <ToastProvider />
         <Nav />
         <Routes>
-          <Route path="/checkoutpage" element={<CheckOut/>}/> 
+          <Route path="/checkoutpage" element={<CheckOut />} />
           <Route path="/cart" element={<ShopCart />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/detail/:id" element={<DetailProduct />} />
@@ -29,5 +29,5 @@ createRoot(document.getElementById("root")).render(
         </Routes>
       </BrowserRouter>
     </CartProvider>
-  </StrictMode>
+  </StrictMode>,
 );
