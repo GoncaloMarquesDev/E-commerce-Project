@@ -117,7 +117,12 @@ function ShopCart() {
               <span>{cart.reduce((acc, item) => acc + item.quantity, 0)}</span>{" "}
               : Items in cart
             </p>
-            <button className="shop-cart-btn">BUY</button>
+            <Link
+              to="/checkoutpage"
+              className={`shop-cart-btn ${cart.length === 0 ? "disabled" : ""}`}
+            >
+              Checkout
+            </Link>
           </div>
         </div>
       </div>

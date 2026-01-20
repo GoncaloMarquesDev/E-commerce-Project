@@ -1,0 +1,13 @@
+@use "../../styles/variables" as variables;
+@use "../../styles/mixins" as mixins;
+
+.checkout-page {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    box-sizing: border-box;
+    align-items: center;
+}
