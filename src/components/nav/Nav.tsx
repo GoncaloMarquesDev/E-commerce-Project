@@ -5,6 +5,9 @@ import SearchBar from "../searchbar/SearchBar";
 import { PiShoppingCartSimpleLight } from "react-icons/pi";
 import { useContext, useState, useEffect, useRef } from "react";
 import { CartContext } from "../../context/CartContext";
+
+import MiniCart from "../minicart/MiniCart";
+
 import "../nav/Nav.scss";
 
 function Nav() {
@@ -13,6 +16,8 @@ function Nav() {
 
   const [menuActive, setMenuActive] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+
+   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -56,14 +61,35 @@ function Nav() {
 
         <div className="nav-items">
           <SearchBar />
-          <li className="cart-icon">
+
+          <li
+        className="cart-icon"
+        onMouseEnter={() => setIsDropdownOpen(true)}
+        onMouseLeave={() => setIsDropdownOpen(false)}
+        style={{ position: "relative" }}
+      >
+        <Link to="/cart">
+          <PiShoppingCartSimpleLight size={40} />
+          {totalItems > 0 && (
+            <span className="cart-badge">{totalItems}</span>
+          )}
+        </Link>
+
+        {isDropdownOpen && totalItems > 0 && (
+          <div className="cart-dropdown">
+            <MiniCart isPreview />
+          </div>
+        )}
+      </li>
+        {/*   <li className="cart-icon">
             <Link to="/cart">
               <PiShoppingCartSimpleLight size={40} />
               {totalItems > 0 && (
                 <span className="cart-badge">{totalItems}</span>
               )}
             </Link>
-          </li>
+          </li> */}
+
         </div>
       </div>
     </div>

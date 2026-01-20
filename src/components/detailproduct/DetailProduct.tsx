@@ -4,6 +4,7 @@ import "./DetailProduct.scss";
 import MoreLikeThis from "../morelikethis/MoreLikeThis";
 import { CartContext } from "../../context/CartContext";
 import type { Product } from "../../types/products";
+import { notifySuccess } from "../ui/ToastProvider.tsx";
 
 function DetailProduct() {
   const { id } = useParams<{ id: string }>();
@@ -73,12 +74,15 @@ function DetailProduct() {
             <p className="description">{productById.description}</p>
 
             <div className="options">
-              <button
-                className="btn-black"
-                onClick={() => addToCart(String(productById.id), localQuantity)}
-              >
-                Add to cart
-              </button>
+             <button
+  className="btn-black"
+  onClick={() => {
+    addToCart(String(productById.id), productById.title, localQuantity);
+    notifySuccess("Produto adicionado ao carrinho!");
+  }}
+>
+  Add to cart
+</button>
 
               <button
                 className="quantity-btn"

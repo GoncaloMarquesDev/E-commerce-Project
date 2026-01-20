@@ -70,3 +70,29 @@ button {
     background-color: variables.$color-bg-light; // ✅ corrigido
   }
 }
+
+/* No teu ficheiro SCSS global */
+.Toastify__toast--success {
+  background: #ffffff; /* verde mais personalizado */
+  color: rgb(99, 97, 97);
+}
+
+.Toastify__toast--error {
+  background: #f44336; /* vermelho personalizado */
+  color: white;
+}
+
+/* Podes também mexer nas bordas, sombras, fontes, etc */
+.Toastify__toast {
+  border-radius: 8px;
+  font-weight: 600;
+}
+.Toastify__toast-icon {
+  display: none;
+}
+.Toastify__progress-bar {
+  background: #ff4400; /* cor da barra */
+  height: 5px; /* altura da barra */
+  border-radius: 2px; /* borda arredondada */
+  /* podes adicionar animações, sombras, etc */
+}
