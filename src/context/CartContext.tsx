@@ -1,4 +1,11 @@
-import { createContext, useState, useEffect, type ReactNode } from "react";
+import {
+  useMemo,
+  useCallback,
+  createContext,
+  useState,
+  useEffect,
+  type ReactNode,
+} from "react";
 
 interface CartItem {
   id: string;
@@ -6,14 +13,12 @@ interface CartItem {
   quantity: number;
 }
 
-
 interface CartContextType {
   cart: CartItem[];
   quantities: Record<string, number>;
   addToCart: (id: string, title: string, quantity?: number) => void; // recebe o name
   updateCartQuantity: (id: string, quantity: number) => void;
 }
-
 
 export const CartContext = createContext<CartContextType>({
   cart: [],
@@ -52,32 +57,32 @@ export function CartProvider({ children }: CartProviderProps) {
 
   const [cart, setCart] = useState<CartItem[]>(initialState.cart);
   const [quantities, setQuantities] = useState<Record<string, number>>(
-
-    initialState.quantities
+    initialState.quantities,
   );
 
- const addToCart = (id: string, title: string, quantity: number = 1) => {
-  console.log("addToCart chamado com:", { id, title, quantity });
-  if (quantity <= 0) return;
+  const addToCart = useCallback(
+    (id: string, title: string, quantity: number = 1) => {
+      if (quantity <= 0) return;
 
-  setCart((prev) => {
-    const exists = prev.find((item) => item.id === id);
+      setCart((prev) => {
+        const exists = prev.find((item) => item.id === id);
 
-    if (exists) {
-      return prev.map((item) =>
-        item.id === id ? { ...item, quantity } : item
-      );
-    }
+        if (exists) {
+          return prev.map((item) =>
+            item.id === id ? { ...item, quantity } : item,
+          );
+        }
 
-    return [...prev, { id, title, quantity }];
-  });
+        return [...prev, { id, title, quantity }];
+      });
 
-  setQuantities((prev) => ({ ...prev, [id]: quantity }));
-};
+      setQuantities((prev) => ({ ...prev, [id]: quantity }));
+    },
+    [],
+  );
 
-
-
-  const updateCartQuantity = (id: string, quantity: number) => {
+const updateCartQuantity = useCallback(
+  (id: string, quantity: number) => {
     setQuantities((prev) => {
       const copy = { ...prev };
 
@@ -96,10 +101,13 @@ export function CartProvider({ children }: CartProviderProps) {
       }
 
       return prev.map((item) =>
-        item.id === id ? { ...item, quantity } : item
+        item.id === id ? { ...item, quantity } : item,
       );
     });
-  };
+  },
+  [],
+);
+
 
   /**
    * Mantém o localStorage sincronizado com o estado do carrinho
@@ -109,11 +117,14 @@ export function CartProvider({ children }: CartProviderProps) {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(data));
   }, [cart, quantities]);
 
-  return (
-    <CartContext.Provider
-      value={{ cart, quantities, addToCart, updateCartQuantity }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
+  const value = useMemo(() => {
+    return {
+      cart,
+      quantities,
+      addToCart,
+      updateCartQuantity,
+    };
+  }, [cart, quantities, addToCart, updateCartQuantity]);
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

@@ -9,6 +9,10 @@ function ShopCart() {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
   const { cart, updateCartQuantity } = useContext(CartContext);
 
+  //para testar
+  console.log("Cart:", cart);
+  console.log("Cart products:", cartProducts);
+
   // Calcula o preço total
   const totalPrice = cartProducts.reduce((acc, product) => {
     const cartItem = cart.find((c) => c.id === product.id.toString());
@@ -22,12 +26,12 @@ function ShopCart() {
         const results = await Promise.all(
           cart.map(async (cartItem) => {
             const res = await fetch(
-              `https://api.escuelajs.co/api/v1/products/${cartItem.id}`
+              `https://api.escuelajs.co/api/v1/products/${cartItem.id}`,
             );
             if (!res.ok) throw new Error("Error fetching product");
             const product: Product = await res.json();
             return product;
-          })
+          }),
         );
         setCartProducts(results);
       } catch (error) {
@@ -70,7 +74,7 @@ function ShopCart() {
                           e.preventDefault();
                           updateCartQuantity(
                             product.id.toString(),
-                            cartItem.quantity - 1
+                            cartItem.quantity - 1,
                           );
                         }}
                       >
@@ -85,7 +89,7 @@ function ShopCart() {
                           const newQuantity = Number(e.target.value);
                           updateCartQuantity(
                             product.id.toString(),
-                            newQuantity
+                            newQuantity,
                           );
                         }}
                       />
@@ -96,7 +100,7 @@ function ShopCart() {
                           e.preventDefault();
                           updateCartQuantity(
                             product.id.toString(),
-                            cartItem.quantity + 1
+                            cartItem.quantity + 1,
                           );
                         }}
                       >

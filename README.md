@@ -1,69 +1,43 @@
-# React + TypeScript + Vite
+# GM Portfolio & Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance e-commerce platform and portfolio developed as a final project, achieving a final grade of **17/20**. This project demonstrates advanced integration with REST APIs, global state management, and a strong focus on user experience.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [portfolio-gm-pearl.vercel.app](https://portfolio-gm-pearl.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎓 Academic Context
 
-## Expanding the ESLint configuration
+This project was developed as the **Final Project** for the **Frontend Engineering Course**. It marks the culmination of the **React Module**, where I applied advanced concepts of componentization, type safety, and asynchronous data fetching.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Technologies Used
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This project leverages a modern and robust tech stack:
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **React**: Core library for building a dynamic and efficient user interface.
+- **TypeScript**: Implemented for strict type checking, ensuring code reliability and fewer runtime errors.
+- **SCSS (Sass)**: Advanced styling with variables and nesting for a polished, maintainable design.
+- **React Context API**: Used to manage the **Shopping Cart Global State**, allowing seamless data flow between components.
+- **React Hot Toast**: Integrated with a custom **Toast Provider** to give real-time, non-intrusive feedback (e.g., "Item added to cart").
+- **LocalStorage**: Implemented to persist cart data, ensuring the user's selection remains available after page refreshes.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ✨ Main Features
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Shopping Cart System**: Fully functional cart powered by **React Context**, allowing users to add, remove, and manage items globally.
+- **Dynamic Product Catalog**: Real-time data fetching from the **EscuelaJS API** to display products, prices, and categories.
+- **Interactive Forms**: Built-in forms for user interaction and data submission.
+- **Persistent Experience**: Seamless shopping experience where the cart state is saved in the browser's **LocalStorage**.
+- **Advanced State Management**: Use of `useState` and `useEffect` for local logic and API synchronization.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📡 API Integration
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The application consumes the **Platzi Fake Store API** (EscuelaJS), utilizing multiple endpoints:
+
+- **Products**: `GET /products` – To list and display all available items.
+- **Categories**: `GET /categories` – To filter products by their specific types.
+- **User Feedback**: Integrated with a notification system to confirm API-related actions.
+
+## 🛠️ Installation and Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com
+   ```
