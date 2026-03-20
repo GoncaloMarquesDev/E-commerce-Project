@@ -12,6 +12,9 @@ function DetailProduct() {
 
   const { addToCart, quantities } = useContext(CartContext);
 
+  const [mainImageIndex, setMainImageIndex] = useState(0);
+  const [error, setError] = useState<string | null>(null);
+
   const [localQuantity, setLocalQuantity] = useState<number>(0);
 
   useEffect(() => {
@@ -19,7 +22,7 @@ function DetailProduct() {
     const fetchProductById = async (): Promise<void> => {
       try {
         const data = await fetch(
-          `https://api.escuelajs.co/api/v1/products/${id}`
+          `https://api.escuelajs.co/api/v1/products/${id}`,
         );
         if (!data.ok) {
           throw new Error("Error searching product");
@@ -28,6 +31,7 @@ function DetailProduct() {
         setProductById(resultProductById);
       } catch (error) {
         console.error("Error fetching item:", error);
+        setError("Erro ao carregar o produto.");
       }
     };
 
@@ -41,6 +45,7 @@ function DetailProduct() {
   }, [id, quantities]);
 
   if (!productById) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <>
@@ -54,6 +59,10 @@ function DetailProduct() {
                     key={index}
                     src={img}
                     alt={`${productById.title} ${index}`}
+                    onClick={() => setMainImageIndex(index)}
+                    className={
+                      mainImageIndex === index ? "active-thumbnail" : ""
+                    }
                   />
                 ))
               ) : (
@@ -62,7 +71,7 @@ function DetailProduct() {
             </div>
             <div className="main-image">
               <img
-                src={productById.images[0] || "/placeholder.png"}
+                src={productById.images[mainImageIndex] || "/placeholder.png"}
                 alt={productById.title}
               />
             </div>
@@ -74,15 +83,20 @@ function DetailProduct() {
             <p className="description">{productById.description}</p>
 
             <div className="options">
-             <button
-  className="btn-black"
-  onClick={() => {
-    addToCart(String(productById.id), productById.title, localQuantity);
-    notifySuccess("Produto adicionado ao carrinho!");
-  }}
->
-  Add to cart
-</button>
+              <button
+                className="btn-black"
+                disabled={localQuantity === 0}
+                onClick={() => {
+                  addToCart(
+                    String(productById.id),
+                    productById.title,
+                    localQuantity,
+                  );
+                  notifySuccess("Produto adicionado ao carrinho!");
+                }}
+              >
+                Add to cart
+              </button>
 
               <button
                 className="quantity-btn"
@@ -95,6 +109,7 @@ function DetailProduct() {
               <input
                 className="input-detail"
                 type="number"
+                step="1"
                 min="0"
                 value={localQuantity}
                 onChange={(e) =>
