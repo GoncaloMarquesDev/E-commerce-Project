@@ -44,6 +44,7 @@ function AllCategories() {
           {allProducts.map((product: Product) => (
             <Link to={`/detail/${product.id}`} key={product.id}>
               <ProductCard
+               id={product.id}
                 imgSrc={product.images?.[0] || "/placeholder.png"}
                 itemName={product.title}
                 price={product.price}

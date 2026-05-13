@@ -60,7 +60,29 @@
   }
 
   a {
-    text-decoration: none; // remove sublinhado
+    position: relative;
+    text-decoration: none;
+    color: black;
+    padding-bottom: 4px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: #f07103;
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      color: #f07103;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
   }
 }
 
@@ -176,7 +198,6 @@
   }
 
   .cart-badge {
- 
     top: 0;
     right: -12px;
     font-size: 0.7rem;

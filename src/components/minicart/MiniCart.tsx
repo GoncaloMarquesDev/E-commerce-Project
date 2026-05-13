@@ -28,7 +28,7 @@ export default function MiniCart({ isPreview = false }: MiniCartProps) {
 
       {!isPreview && (
         <button onClick={() => { /* navegar para checkout, se quiseres */ }}>
-          Ir para checkout
+          Go to checkout
         </button>
       )}
     </div>
