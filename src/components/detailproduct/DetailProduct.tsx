@@ -5,6 +5,7 @@ import MoreLikeThis from "../morelikethis/MoreLikeThis";
 import { CartContext } from "../../context/CartContext";
 import type { Product } from "../../types/products";
 import { notifySuccess } from "../ui/ToastProvider.tsx";
+import Loader from "../loader/Loader.tsx";
 
 function DetailProduct() {
   const { id } = useParams<{ id: string }>();
@@ -44,7 +45,7 @@ function DetailProduct() {
     }
   }, [id, quantities]);
 
-  if (!productById) return <p>Loading...</p>;
+  if (!productById) return <Loader/>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -92,7 +93,7 @@ function DetailProduct() {
                     productById.title,
                     localQuantity,
                   );
-                  notifySuccess("Produto adicionado ao carrinho!");
+                  notifySuccess("Item added to your cart!");
                 }}
               >
                 Add to cart

@@ -33,7 +33,7 @@ function Categories() {
         const clothesList: Product[] = await data.json();
         setClothes(clothesList);
       } catch (error) {
-        console.error("Erro ao buscar produtos da categoria:", error);
+        console.error("Error searching products of that category :", error);
       } finally {
         setLoading(false);
       }
@@ -55,6 +55,7 @@ function Categories() {
           {clothes.map((item: Product) => (
             <Link to={`/detail/${item.id}`} key={item.id}>
               <ProductCard
+              id={item.id}
                 imgSrc={item.images?.[0] || "/placeholder.png"}
                 itemName={item.title}
                 price={item.price}

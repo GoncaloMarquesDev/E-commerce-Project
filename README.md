@@ -1,14 +1,29 @@
-# GM Portfolio & Store
+🛍️ E-Commerce App
 
-A high-performance e-commerce platform and portfolio developed as a final project, achieving a final grade of **17/20**. This project demonstrates advanced integration with REST APIs, global state management, and a strong focus on user experience.
+A modern e-commerce web application that allows users to browse products, manage a shopping cart, and simulate a complete online shopping experience.
 
-🔗 **Live Demo:** [portfolio-gm-pearl.vercel.app](https://portfolio-gm-pearl.vercel.app)
+🔗 Live Demo: https://e-commerce-project-five-olive.vercel.app/
 
-## 🎓 Academic Context
+⚡ Features
+🛒 Fully functional shopping cart (add, remove, update items)
+💾 Persistent cart using localStorage
+🔍 Dynamic product catalog with category filtering
+🔔 Real-time feedback using toast notifications
+📱 Responsive design (mobile-first)
+⚡ Global state management with Context API
+🛠️ Tech Stack
+React + TypeScript
+Context API (global state management)
+REST API Integration (EscuelaJS API)
+SCSS (Sass)
+LocalStorage (data persistence)
+React Hot Toast (user feedback)
+Vercel (deployment)
 
-This project was developed as the **Final Project** for the **Frontend Engineering Course**. It marks the culmination of the **React Module**, where I applied advanced concepts of componentization, type safety, and asynchronous data fetching.
 
-## 🚀 Technologies Used
+📡 API
+
+This project uses the EscuelaJS Fake Store API to fetch product and category data dynamically.
 
 This project leverages a modern and robust tech stack:
 
